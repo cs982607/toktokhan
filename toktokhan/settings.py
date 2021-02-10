@@ -75,8 +75,14 @@ WSGI_APPLICATION = 'toktokhan.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'root',
+        'USER': 'root',
+        'PASSWORD':'gustjr12',
+        'HOST': 'localhost',
+        'PORT': '8000'
+        ,
     }
 }
 # DRF auth settings

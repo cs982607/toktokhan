@@ -1,12 +1,10 @@
-from rest_framework.decorators import api_view
 from django.contrib.auth.decorators import login_required
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from .models import Car, Image, Company
 from .serializers import CarSerializer,ImageSerializer,CompanySerializer
 
-class CarSerializerView(CarSerializer):
+class CarViewSet(viewsets.ModelViewSet):
     """
         차량정보를 저장하거나 불러오는 API
         ---
@@ -20,17 +18,5 @@ class CarSerializerView(CarSerializer):
             - comany           : 제조사
             - image            : 이미지 사진
     """
-
-    @api_view(['GET', 'POST'])
-    def posts(request):
-        if request.method == 'GET':
-            posts = Car.objects.all()
-            post_list = CarSerializer(posts, many=True)
-            return Response(post_list.data)
-        else:
-            serializers = CarSerializer(data=request.data)
-            if serializers.is_valid():
-                serializers.save()
-                return Response(serializers.data, status=201)
-            return Response(serializers.errors, status=400)
-
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer
