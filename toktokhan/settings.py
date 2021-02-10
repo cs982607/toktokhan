@@ -1,5 +1,6 @@
 from pathlib import Path
 import datetime
+import  my_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,14 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x1_l6fk*62lqwue^4u_=x#wqu7iip^a!81h-15a0u)m_yon)-t'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DATABASES = my_settings.DATABASES
+SECRET_KEY = my_settings.SECRET_KEY
 
 # Application definition
 
@@ -73,18 +72,6 @@ WSGI_APPLICATION = 'toktokhan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'root',
-        'USER': 'root',
-        'PASSWORD':'gustjr12',
-        'HOST': 'localhost',
-        'PORT': '8000'
-        ,
-    }
-}
 # DRF auth settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
