@@ -13,9 +13,18 @@ class CompanySerializer(ModelSerializer):
         fields = ['company_name']
 
 class CarSerializer(ModelSerializer):
-    image = ImageSerializer(read_only=True)
-    company = CompanySerializer(read_only=True)
+    image = ImageSerializer()
+    company = CompanySerializer()
     class Meta:
         model = Car
         fields = [ 'username' , 'image', 'company', 'name', 'accident_history', 'price' ]
+
+    def create(self, validated_data):
+        image_data = validated_data.pop('image')
+        company_data = validated_data.pop('company')
+        car = Car.objects.create(**validated_data)
+        Image.objects.create(car=car, **image_data)
+        Company.objects.create(car=car, **company_data)
+        return car
+
 

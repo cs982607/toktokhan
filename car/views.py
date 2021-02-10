@@ -18,5 +18,8 @@ class CarViewSet(viewsets.ModelViewSet):
             - comany           : 제조사
             - image            : 이미지 사진
     """
-    queryset = Car.objects.all()
+    queryset = Car.objects.select_related('company', 'image').all()
     serializer_class = CarSerializer
+
+
+
